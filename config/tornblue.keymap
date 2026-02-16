@@ -5,7 +5,7 @@
  * Used as: 3×5 + 3 thumb (outer column and outer thumb = &none)
  *
  * Layers (0–6):
- *   BASE  — QWERTY with home row mods (GACS order)
+ *   BASE  — QWERTY with home row mods (CAGS order)
  *   NAV   — Vim arrows, clipboard, page navigation  (hold ENT)
  *   NUM   — Right-hand numpad with coding punctuation (hold TAB)
  *   SYM   — Logically grouped symbols and operators   (hold BSP)
@@ -13,7 +13,7 @@
  *   SYM2  — Rare symbols and Bluetooth profiles       (hold DEL)
  *   MEDIA — Transport controls                        (hold ESC)
  *
- * Home row mods: GACS order — GUI ALT CTL SFT from pinky → index
+ * Home row mods: CAGS order — CTL ALT GUI SFT from pinky → index
  * Hyper key (⌘⌥⌃⇧) on G and H
  *
  * Key positions (44 keys):
@@ -102,7 +102,7 @@
             label = "BASE";
             bindings = <
     &none       &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P       &none
-    &none       &hm LGUI A  &hm LALT S  &hm LCTRL D &hm LSHFT F &hm HYPER G     &hm HYPER H &hm RSHFT J &hm RCTRL K &hm RALT L  &hm RGUI SEMI &none
+    &none       &hm LCTRL A &hm LALT S  &hm LGUI D  &hm LSHFT F &hm HYPER G     &hm HYPER H &hm RSHFT J &hm RGUI K  &hm RALT L  &hm RCTRL SEMI &none
     &none       &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &none
                     &none   &lt MEDIA ESC &lt NAV RET &lt NUM TAB                 &lt FUN SPACE &lt SYM BSPC &lt SYM2 DEL &none
             >;
@@ -116,7 +116,7 @@
             label = "NAV";
             bindings = <
     &none       &trans      &trans      &trans      &trans      &trans          &kp LC(Y)   &kp LC(V)   &kp LC(C)   &kp LC(X)   &kp LC(Z)   &none
-    &none       &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp HYPER       &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT   &caps_word  &none
+    &none       &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT   &kp HYPER       &caps_word  &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT   &none
     &none       &trans      &trans      &trans      &trans      &trans          &kp HOME    &kp PG_DN   &kp PG_UP   &kp END     &kp INS     &none
                     &none   &trans      &trans      &trans                      &kp SPACE   &kp BSPC    &kp DEL     &none
             >;
@@ -129,7 +129,7 @@
             label = "NUM";
             bindings = <
     &none       &trans      &trans      &trans      &trans      &trans          &kp LBKT    &kp N7      &kp N8      &kp N9      &kp RBKT    &none
-    &none       &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp HYPER       &kp SQT     &kp N4      &kp N5      &kp N6      &kp EQUAL   &none
+    &none       &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT   &kp HYPER       &kp SQT     &kp N4      &kp N5      &kp N6      &kp EQUAL   &none
     &none       &trans      &trans      &trans      &trans      &trans          &kp GRAVE   &kp N1      &kp N2      &kp N3      &kp BSLH    &none
                     &none   &trans      &trans      &trans                      &kp MINUS   &kp N0      &kp DOT     &none
             >;
@@ -144,7 +144,7 @@
             label = "SYM";
             bindings = <
     &none       &kp LBRC    &kp RBRC    &kp LT      &kp GT      &kp GRAVE       &trans      &trans      &trans      &trans      &trans      &none
-    &none       &kp LPAR    &kp RPAR    &kp EXCL    &kp EQUAL   &kp PLUS        &kp HYPER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI    &none
+    &none       &kp LPAR    &kp RPAR    &kp EXCL    &kp EQUAL   &kp PLUS        &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
     &none       &kp LBKT    &kp RBKT    &kp AMPS    &kp PIPE    &kp TILDE       &trans      &trans      &trans      &trans      &trans      &none
                     &none   &kp UNDER   &kp ASTRK   &kp DQT                     &trans      &trans      &trans      &none
             >;
@@ -157,7 +157,7 @@
             label = "FUN";
             bindings = <
     &none       &kp F12     &kp F7      &kp F8      &kp F9      &kp PSCRN       &trans      &trans      &trans      &trans      &trans      &none
-    &none       &kp F11     &kp F4      &kp F5      &kp F6      &kp SLCK        &kp HYPER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI    &none
+    &none       &kp F11     &kp F4      &kp F5      &kp F6      &kp SLCK        &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
     &none       &kp F10     &kp F1      &kp F2      &kp F3      &kp PAUSE_BREAK &trans      &trans      &trans      &trans      &trans      &none
                     &none   &kp K_APP   &kp RET     &kp TAB                     &trans      &trans      &trans      &none
             >;
@@ -171,7 +171,7 @@
             label = "SYM2";
             bindings = <
     &none       &kp AT      &kp HASH    &kp DLLR    &trans      &trans          &trans      &trans      &trans      &trans      &trans      &none
-    &none       &kp PRCNT   &kp CARET   &kp BSLH    &trans      &trans          &kp HYPER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI    &none
+    &none       &kp PRCNT   &kp CARET   &kp BSLH    &trans      &trans          &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
     &none       &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR &trans     &trans      &trans      &trans      &trans      &none
                     &none   &trans      &trans      &trans                      &trans      &trans      &trans      &none
             >;
@@ -184,7 +184,7 @@
             label = "MEDIA";
             bindings = <
     &none       &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans      &none
-    &none       &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp HYPER       &kp C_PREV  &kp C_PP    &kp C_NEXT  &trans      &trans      &none
+    &none       &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT   &kp HYPER       &kp C_PREV  &kp C_PP    &kp C_NEXT  &trans      &trans      &none
     &none       &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &none       &none
                     &none   &trans      &trans      &trans                      &kp C_STOP  &trans      &trans      &none
             >;
