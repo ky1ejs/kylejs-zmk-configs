@@ -3,9 +3,9 @@
 # Used by GitHub Actions to build firmware for each half.
 # Add additional boards here as you expand your collection.
 #
-# Board definitions live in: boards/arm/kylejs_tornblue/
+# Board definitions live in: boards/arm/tornblue/
 # Keymap and config live in: config/
 ---
 include:
-  - board: kylejs_tornblue_left
-  - board: kylejs_tornblue_right
+  - board: tornblue_left
+  - board: tornblue_right
