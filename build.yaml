@@ -1,20 +1,11 @@
-# This file generates the GitHub Actions matrix.
-# For simple board + shield combinations, add them to the top level board and
-# shield arrays, for more control, add individual board + shield combinations
-# to the `include` property. You can also use the `cmake-args` property to
-# pass flags to the build command, `snippet` to add a Zephyr snippet, and
-# `artifact-name` to assign a name to distinguish build outputs from each other:
+# build.yaml — ZMK firmware build matrix
+# ─────────────────────────────────────────────────────────
+# Used by GitHub Actions to build firmware for each half.
+# Add additional boards here as you expand your collection.
 #
-# board: [ "nice_nano" ]
-# shield: [ "corne_left", "corne_right" ]
-# include:
-#   - board: bdn9_rev2
-#   - board: nice_nano
-#     shield: reviung41
-#   - board: nice_nano
-#     shield: corne_left
-#     snippet: studio-rpc-usb-uart
-#     cmake-args: -DCONFIG_ZMK_STUDIO=y
-#     artifact-name: corne_left_with_studio
-#
+# Board definitions live in: boards/arm/kylejs_tornblue/
+# Keymap and config live in: config/
 ---
+include:
+  - board: kylejs_tornblue_left
+  - board: kylejs_tornblue_right
