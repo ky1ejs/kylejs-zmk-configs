@@ -38,8 +38,7 @@ static int led_init(const struct device *dev)
 {
     ARG_UNUSED(dev);
 
-    if (!gpio_is_ready_dt(&led1) || !gpio_is_ready_dt(&led2) || !gpio_is_ready_dt(&led3))
-    {
+    if (!gpio_is_ready_dt(&led1) || !gpio_is_ready_dt(&led2) || !gpio_is_ready_dt(&led3)) {
         return -ENODEV;
     }
 

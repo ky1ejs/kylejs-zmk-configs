@@ -1,7 +1,8 @@
 /*
  * tornblue.keymap — ZMK keymap for Kyle's TornBlue
  *
- * Layout: 3×5 split + 3 thumb keys per side + dual rotary encoders
+ * Physical layout: 3×6 split + 4 thumb keys per side (44 keys total)
+ * Used as: 3×5 + 3 thumb (outer column and outer thumb = &none)
  *
  * Layers (0–6):
  *   BASE  — QWERTY with home row mods (GACS order)
@@ -15,11 +16,15 @@
  * Home row mods: GACS order — GUI ALT CTL SFT from pinky → index
  * Hyper key (⌘⌥⌃⇧) on G and H
  *
- * Key positions (for combos reference):
- *    0  1  2  3  4  |  5  6  7  8  9
- *   10 11 12 13 14  | 15 16 17 18 19
- *   20 21 22 23 24  | 25 26 27 28 29
- *         30 31 32  | 33 34 35
+ * Key positions (44 keys):
+ *    0  1  2  3  4  5  |  6  7  8  9 10 11
+ *   12 13 14 15 16 17  | 18 19 20 21 22 23
+ *   24 25 26 27 28 29  | 30 31 32 33 34 35
+ *         36 37 38 39  | 40 41 42 43
+ *
+ * Positions 0,12,24 (left outer col), 11,23,35 (right outer col),
+ * 36 (left outer thumb), 43 (right outer thumb) are unused (&none).
+ * Fill them in if you want extra keys!
  */
 
 #include <behaviors.dtsi>
@@ -37,16 +42,6 @@
 
 /* ── Hyper = all four modifiers ──────────────────────────────── */
 #define HYPER LS(LC(LA(LGUI)))
-
-/* ── Disable unused SPI (no display) ─────────────────────────── */
-/* Old-style pin properties were removed in Zephyr 3.5 — delete  */
-/* them so the DTS validator doesn't reject the board definition. */
-&spi0 {
-    status = "disabled";
-    /delete-property/ sck-pin;
-    /delete-property/ mosi-pin;
-    /delete-property/ miso-pin;
-};
 
 / {
     /* ── Behaviors ───────────────────────────────────────────── */
@@ -68,31 +63,31 @@
 
         combo_equal {
             timeout-ms = <50>;
-            key-positions = <1 2>;          /* W + E  →  = */
+            key-positions = <2 3>;          /* W + E  →  = */
             bindings = <&kp EQUAL>;
             layers = <BASE>;
         };
         combo_under {
             timeout-ms = <50>;
-            key-positions = <2 3>;          /* E + R  →  _ */
+            key-positions = <3 4>;          /* E + R  →  _ */
             bindings = <&kp UNDER>;
             layers = <BASE>;
         };
         combo_lpar {
             timeout-ms = <50>;
-            key-positions = <6 7>;          /* U + I  →  ( */
+            key-positions = <8 9>;          /* U + I  →  ( */
             bindings = <&kp LPAR>;
             layers = <BASE>;
         };
         combo_rpar {
             timeout-ms = <50>;
-            key-positions = <7 8>;          /* I + O  →  ) */
+            key-positions = <9 10>;         /* I + O  →  ) */
             bindings = <&kp RPAR>;
             layers = <BASE>;
         };
         combo_esc {
             timeout-ms = <50>;
-            key-positions = <21 22>;        /* X + C  →  ESC */
+            key-positions = <26 27>;        /* X + C  →  ESC */
             bindings = <&kp ESC>;
             layers = <BASE>;
         };
@@ -106,94 +101,94 @@
         base_layer {
             label = "BASE";
             bindings = <
-    &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
-    &hm LGUI A  &hm LALT S  &hm LCTRL D &hm LSHFT F &hm HYPER G     &hm HYPER H &hm RSHFT J &hm RCTRL K &hm RALT L  &hm RGUI SEMI
-    &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH
-                        &lt MEDIA ESC   &lt NAV RET &lt NUM TAB      &lt FUN SPACE &lt SYM BSPC &lt SYM2 DEL
+    &none       &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P       &none
+    &none       &hm LGUI A  &hm LALT S  &hm LCTRL D &hm LSHFT F &hm HYPER G     &hm HYPER H &hm RSHFT J &hm RCTRL K &hm RALT L  &hm RGUI SEMI &none
+    &none       &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp FSLH    &none
+                    &none   &lt MEDIA ESC &lt NAV RET &lt NUM TAB                 &lt FUN SPACE &lt SYM BSPC &lt SYM2 DEL &none
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>, <&inc_dec_kp C_AC_SCROLL_DOWN C_AC_SCROLL_UP>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        /* ── 1: NAV  (hold ENT — pos 31) ────────────────────── */
+        /* ── 1: NAV  (hold ENT — pos 38) ────────────────────── */
         /*  Clipboard on right top row (Ctrl+letter for Linux/Win)  */
         /*  Vim arrows on right home row, page nav on bottom row    */
         nav_layer {
             label = "NAV";
             bindings = <
-    &trans      &trans      &trans      &trans      &trans          &kp LC(Y)   &kp LC(V)   &kp LC(C)   &kp LC(X)   &kp LC(Z)
-    &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp HYPER       &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT   &caps_word
-    &trans      &trans      &trans      &trans      &trans          &kp HOME    &kp PG_DN   &kp PG_UP   &kp END     &kp INS
-                             &trans      &trans      &trans          &kp SPACE   &kp BSPC    &kp DEL
+    &none       &trans      &trans      &trans      &trans      &trans          &kp LC(Y)   &kp LC(V)   &kp LC(C)   &kp LC(X)   &kp LC(Z)   &none
+    &none       &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp HYPER       &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT   &caps_word  &none
+    &none       &trans      &trans      &trans      &trans      &trans          &kp HOME    &kp PG_DN   &kp PG_UP   &kp END     &kp INS     &none
+                    &none   &trans      &trans      &trans                      &kp SPACE   &kp BSPC    &kp DEL     &none
             >;
-            sensor-bindings = <&inc_dec_kp LC(LS(TAB)) LC(TAB)>, <&inc_dec_kp RIGHT LEFT>;
+            sensor-bindings = <&inc_dec_kp LC(LS(TAB)) LC(TAB)>;
         };
 
-        /* ── 2: NUM  (hold TAB — pos 32) ────────────────────── */
+        /* ── 2: NUM  (hold TAB — pos 39) ────────────────────── */
         /*  Right-hand numpad: 789 / 456 / 123  with [ ] ' = ` \  */
         num_layer {
             label = "NUM";
             bindings = <
-    &trans      &trans      &trans      &trans      &trans          &kp LBKT    &kp N7      &kp N8      &kp N9      &kp RBKT
-    &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp HYPER       &kp SQT     &kp N4      &kp N5      &kp N6      &kp EQUAL
-    &trans      &trans      &trans      &trans      &trans          &kp GRAVE   &kp N1      &kp N2      &kp N3      &kp BSLH
-                             &trans      &trans      &trans          &kp MINUS   &kp N0      &kp DOT
+    &none       &trans      &trans      &trans      &trans      &trans          &kp LBKT    &kp N7      &kp N8      &kp N9      &kp RBKT    &none
+    &none       &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp HYPER       &kp SQT     &kp N4      &kp N5      &kp N6      &kp EQUAL   &none
+    &none       &trans      &trans      &trans      &trans      &trans          &kp GRAVE   &kp N1      &kp N2      &kp N3      &kp BSLH    &none
+                    &none   &trans      &trans      &trans                      &kp MINUS   &kp N0      &kp DOT     &none
             >;
-            sensor-bindings = <&inc_dec_kp PLUS MINUS>, <&inc_dec_kp PLUS MINUS>;
+            sensor-bindings = <&inc_dec_kp PLUS MINUS>;
         };
 
-        /* ── 3: SYM  (hold BSP — pos 34) ────────────────────── */
+        /* ── 3: SYM  (hold BSP — pos 41) ────────────────────── */
         /*  Brackets stacked: pinky=open, ring=close              */
         /*  Home row: ( ) ! = +  — most common coding operators   */
         /*  Bigrams: != <= >= <> () {} [] are inward rolls         */
         sym_layer {
             label = "SYM";
             bindings = <
-    &kp LBRC    &kp RBRC    &kp LT      &kp GT      &kp GRAVE       &trans      &trans      &trans      &trans      &trans
-    &kp LPAR    &kp RPAR    &kp EXCL    &kp EQUAL   &kp PLUS        &kp HYPER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-    &kp LBKT    &kp RBKT    &kp AMPS    &kp PIPE    &kp TILDE       &trans      &trans      &trans      &trans      &trans
-                             &kp UNDER   &kp ASTRK   &kp DQT         &trans      &trans      &trans
+    &none       &kp LBRC    &kp RBRC    &kp LT      &kp GT      &kp GRAVE       &trans      &trans      &trans      &trans      &trans      &none
+    &none       &kp LPAR    &kp RPAR    &kp EXCL    &kp EQUAL   &kp PLUS        &kp HYPER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI    &none
+    &none       &kp LBKT    &kp RBKT    &kp AMPS    &kp PIPE    &kp TILDE       &trans      &trans      &trans      &trans      &trans      &none
+                    &none   &kp UNDER   &kp ASTRK   &kp DQT                     &trans      &trans      &trans      &none
             >;
-            sensor-bindings = <&inc_dec_kp LC(Y) LC(Z)>, <&inc_dec_kp LC(Y) LC(Z)>;
+            sensor-bindings = <&inc_dec_kp LC(Y) LC(Z)>;
         };
 
-        /* ── 4: FUN  (hold SPC — pos 33) ────────────────────── */
+        /* ── 4: FUN  (hold SPC — pos 40) ────────────────────── */
         /*  F-keys in numpad arrangement on left hand              */
         fun_layer {
             label = "FUN";
             bindings = <
-    &kp F12     &kp F7      &kp F8      &kp F9      &kp PSCRN       &trans      &trans      &trans      &trans      &trans
-    &kp F11     &kp F4      &kp F5      &kp F6      &kp SLCK        &kp HYPER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-    &kp F10     &kp F1      &kp F2      &kp F3      &kp PAUSE_BREAK &trans      &trans      &trans      &trans      &trans
-                             &kp K_APP   &kp RET     &kp TAB         &trans      &trans      &trans
+    &none       &kp F12     &kp F7      &kp F8      &kp F9      &kp PSCRN       &trans      &trans      &trans      &trans      &trans      &none
+    &none       &kp F11     &kp F4      &kp F5      &kp F6      &kp SLCK        &kp HYPER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI    &none
+    &none       &kp F10     &kp F1      &kp F2      &kp F3      &kp PAUSE_BREAK &trans      &trans      &trans      &trans      &trans      &none
+                    &none   &kp K_APP   &kp RET     &kp TAB                     &trans      &trans      &trans      &none
             >;
-            sensor-bindings = <&inc_dec_kp C_BRI_UP C_BRI_DN>, <&inc_dec_kp C_BRI_UP C_BRI_DN>;
+            sensor-bindings = <&inc_dec_kp C_BRI_UP C_BRI_DN>;
         };
 
-        /* ── 5: SYM2 (hold DEL — pos 35) ────────────────────── */
+        /* ── 5: SYM2 (hold DEL — pos 42) ────────────────────── */
         /*  Rare symbols on left hand — no same-hand chording      */
         /*  BT profiles on bottom row for wireless management      */
         sym2_layer {
             label = "SYM2";
             bindings = <
-    &kp AT      &kp HASH    &kp DLLR    &trans      &trans          &trans      &trans      &trans      &trans      &trans
-    &kp PRCNT   &kp CARET   &kp BSLH    &trans      &trans          &kp HYPER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI
-    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR &trans     &trans      &trans      &trans      &trans
-                             &trans      &trans      &trans          &trans      &trans      &trans
+    &none       &kp AT      &kp HASH    &kp DLLR    &trans      &trans          &trans      &trans      &trans      &trans      &trans      &none
+    &none       &kp PRCNT   &kp CARET   &kp BSLH    &trans      &trans          &kp HYPER   &kp RSHFT   &kp RCTRL   &kp RALT    &kp RGUI    &none
+    &none       &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR &trans     &trans      &trans      &trans      &trans      &none
+                    &none   &trans      &trans      &trans                      &trans      &trans      &trans      &none
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>, <&inc_dec_kp C_AC_SCROLL_DOWN C_AC_SCROLL_UP>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        /* ── 6: MEDIA (hold ESC — pos 30) ────────────────────── */
+        /* ── 6: MEDIA (hold ESC — pos 37) ────────────────────── */
         /*  Transport on right home row. Volume on encoders only.  */
         media_layer {
             label = "MEDIA";
             bindings = <
-    &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-    &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp HYPER       &kp C_PREV  &kp C_PP    &kp C_NEXT  &trans      &trans
-    &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans
-                             &trans      &trans      &trans          &kp C_STOP  &trans      &trans
+    &none       &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans      &none
+    &none       &kp LGUI    &kp LALT    &kp LCTRL   &kp LSHFT   &kp HYPER       &kp C_PREV  &kp C_PP    &kp C_NEXT  &trans      &trans      &none
+    &none       &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &none       &none
+                    &none   &trans      &trans      &trans                      &kp C_STOP  &trans      &trans      &none
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>, <&inc_dec_kp C_NEXT C_PREV>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
     };
 };
