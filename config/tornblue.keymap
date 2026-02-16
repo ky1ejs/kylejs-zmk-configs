@@ -38,6 +38,9 @@
 /* ── Hyper = all four modifiers ──────────────────────────────── */
 #define HYPER LS(LC(LA(LGUI)))
 
+/* ── Disable unused SPI (no display) ─────────────────────────── */
+&spi0 { status = "disabled"; };
+
 / {
     /* ── Behaviors ───────────────────────────────────────────── */
     behaviors {
