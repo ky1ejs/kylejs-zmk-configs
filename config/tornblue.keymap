@@ -75,13 +75,13 @@
         };
         combo_lpar {
             timeout-ms = <50>;
-            key-positions = <8 9>;          /* U + I  →  ( */
+            key-positions = <7 8>;          /* U + I  →  ( */
             bindings = <&kp LPAR>;
             layers = <BASE>;
         };
         combo_rpar {
             timeout-ms = <50>;
-            key-positions = <9 10>;         /* I + O  →  ) */
+            key-positions = <8 9>;          /* I + O  →  ) */
             bindings = <&kp RPAR>;
             layers = <BASE>;
         };
