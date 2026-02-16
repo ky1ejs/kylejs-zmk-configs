@@ -1,4 +1,6 @@
 ---
 include:
   - board: tornblue_left//zmk
+    artifact-name: tornblue_left-zmk
   - board: tornblue_right//zmk
+    artifact-name: tornblue_right-zmk
