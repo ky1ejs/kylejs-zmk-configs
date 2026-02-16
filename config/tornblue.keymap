@@ -39,7 +39,14 @@
 #define HYPER LS(LC(LA(LGUI)))
 
 /* ── Disable unused SPI (no display) ─────────────────────────── */
-&spi0 { status = "disabled"; };
+/* Old-style pin properties were removed in Zephyr 3.5 — delete  */
+/* them so the DTS validator doesn't reject the board definition. */
+&spi0 {
+    status = "disabled";
+    /delete-property/ sck-pin;
+    /delete-property/ mosi-pin;
+    /delete-property/ miso-pin;
+};
 
 / {
     /* ── Behaviors ───────────────────────────────────────────── */
