@@ -125,15 +125,16 @@ Right: `SPC/FUN  BSP/SYM  DEL/SYM2`
 | U + I   | 7, 8      | `(`    |
 | I + O   | 8, 9      | `)`    |
 | X + C   | 26, 27    | ESC    |
+| . + /   | 33, 34    | `;`    |
 
 ### Encoder (left only)
 
 | Layer | Rotation |
 |-------|----------|
 | BASE  | Volume up/down |
-| NAV   | Tab cycle (Ctrl+Shift+Tab / Ctrl+Tab) |
+| NAV   | Tab cycle (Ctrl+Tab / Ctrl+Shift+Tab) |
 | NUM   | +/− |
-| SYM   | Undo/Redo (Ctrl+Z / Ctrl+Y) |
+| SYM   | Redo/Undo (Ctrl+Y / Ctrl+Z) |
 | FUN   | Brightness up/down |
 | SYM2  | Volume up/down |
 | MEDIA | Volume up/down |
@@ -155,7 +156,6 @@ Z=BT0, X=BT1, C=BT2, V=BT3, B=BT_CLR. Switch profiles to connect to different co
 
 ### Known gaps
 
-- Semicolon (`;`) is not mapped anywhere since `'` replaced it on the home row. Needs a combo (e.g. `.` + `/`).
 - Right encoder is not defined in the board DTS — only the left encoder is functional.
 - Encoder push/click is not wired in the TornBlue board definition.
 - The fork's `led_driver.c` has layer indices that may not match the keymap if layers are reordered.
