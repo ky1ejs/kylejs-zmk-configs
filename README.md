@@ -6,7 +6,7 @@ Personal [ZMK](https://zmk.dev) firmware configuration for Kyle's keyboards.
 
 | Board | Layout | MCU | Notes |
 |-------|--------|-----|-------|
-| [TornBlue](https://github.com/rtitmuss/tornern) | 44-key split (3x6 + 4 thumb) | nRF52840 | Rotary encoder on left half, BLE |
+| [TornBlue](https://github.com/rtitmuss/tornblue) | 44-key split (3x6 + 4 thumb) | nRF52840 | Rotary encoder on left half, BLE |
 
 ## Building
 
