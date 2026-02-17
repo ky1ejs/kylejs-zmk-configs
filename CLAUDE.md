@@ -139,6 +139,7 @@ Right: `SPC/FUN  BSP/SYM  DEL/SYM2`
 | U + I   | 7, 8      | `(`    |
 | I + O   | 8, 9      | `)`    |
 | X + C   | 26, 27    | ESC    |
+| L + '   | 21, 22    | `;`    |
 
 ### Encoder (left only)
 
