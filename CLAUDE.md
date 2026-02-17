@@ -8,6 +8,7 @@ This is a **multi-board** ZMK firmware configuration repo. It contains keymaps a
 - You MUST ALWAYS review the README.md, CLAUDE.md and code comments and update them as needed when making changes to the repo
 - You MUST ALWAYS ensure that keymaps have a easy to ready code comment above them which describes the layout.
 - You MUST ALWAYS avoid placing keys on the same hand as the thumb that is pressed to access that layer (e.g. avoid putting keys on the right hand that are only accessible when holding the right thumb layer key).
+- NEVER commit to main. Create a new branch for your changes, and open a PR when ready.
 
 ## Repository structure
 
