@@ -13,16 +13,24 @@ This is a **multi-board** ZMK firmware configuration repo. It contains keymaps a
 
 ```
 kylejs-zmk-configs/
-├── build.yaml              # Build matrix — lists ALL boards to build
+├── build.yaml                  # Build matrix — lists ALL boards to build
+├── keymap_drawer.config.yaml   # keymap-drawer global config (styling/parsing only, no layouts)
 ├── CLAUDE.md
-└── config/
-    ├── west.yml            # ZMK source (currently points to ky1ejs/zmk fork)
-    ├── tornblue.keymap     # TornBlue: 7-layer keymap with combos and encoder
-    ├── tornblue.conf       # TornBlue: Kconfig overrides
-    └── <board>.keymap/conf # Future boards go here — one .keymap + .conf per board
+├── config/
+│   ├── west.yml                # ZMK source (currently points to ky1ejs/zmk fork)
+│   ├── tornblue.keymap         # TornBlue: 7-layer keymap with combos and encoder
+│   ├── tornblue.conf           # TornBlue: Kconfig overrides
+│   ├── tornblue.json           # TornBlue: physical layout for keymap-drawer visualization
+│   └── <board>.keymap/conf/json # Future boards go here
+├── pages/
+│   ├── template.html           # HTML template with {{BOARD_NAV}} / {{BOARD_SECTIONS}} placeholders
+│   └── build-site.sh           # CI script: discovers SVGs, generates index.html from template
+└── .github/workflows/
+    ├── build.yml               # ZMK firmware build
+    └── draw-and-deploy.yml     # Keymap visualization: draw SVGs → build HTML → deploy to Pages
 ```
 
-When adding a new board, add its `.keymap` and `.conf` to `config/` and add an entry to `build.yaml`. If the board needs a custom ZMK fork or module, update `config/west.yml` accordingly. If the board definition is upstream in ZMK, no fork changes are needed.
+When adding a new board, add its `.keymap`, `.conf`, and `.json` (physical layout) to `config/` and add an entry to `build.yaml`. If the board needs a custom ZMK fork or module, update `config/west.yml` accordingly. If the board definition is upstream in ZMK, no fork changes are needed. The keymap visualization page auto-discovers new boards — no HTML or workflow changes needed.
 
 ## Building and flashing
 
@@ -37,6 +45,24 @@ To flash: plug in the board via USB, enter bootloader mode (usually double-tap r
 - The `.conf` file is shared across both halves of a split board. Do NOT put half-specific config (like `CONFIG_EC11=y` for a half that has an encoder) in the conf — put it in the board's defconfig instead.
 - `build.yaml` must use `artifact-name` if the board qualifier contains `//` (e.g. `tornblue_left//zmk`), otherwise the artifact copy step fails because `//` is interpreted as a path separator.
 - `CONFIG_WS2812_STRIP` does not exist in ZMK 4.1 / Zephyr 4.1. Do not reference it.
+
+## Keymap visualization (GitHub Pages)
+
+Site URL: https://ky1ejs.github.io/kylejs-zmk-configs/
+
+The `draw-and-deploy.yml` workflow runs on every push that changes keymap files, physical layouts, or the visualization config. It:
+
+1. **Draws SVGs** via keymap-drawer's reusable workflow (`caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml`), discovering all `config/*.keymap` files and matching them to `config/<board>.json` physical layouts.
+2. **Builds HTML** by running `pages/build-site.sh`, which discovers the generated SVGs and substitutes them into `pages/template.html`.
+3. **Deploys to GitHub Pages** via `actions/deploy-pages`.
+
+Generated SVGs are NOT committed to the repo — they exist only as CI artifacts and are deployed directly to Pages.
+
+**Config files:**
+- `keymap_drawer.config.yaml` — global styling and parsing config (dark mode, ghost keys for `&none`, HYPER keycode mapping). Does NOT contain physical layouts.
+- `config/<board>.json` — per-board physical layout in QMK-style JSON format (x/y coordinates per key). Auto-discovered by the workflow via `json_path: "config"`.
+
+**Repo Settings prerequisite:** Pages → Source must be set to **GitHub Actions** (not "Deploy from a branch").
 
 ---
 

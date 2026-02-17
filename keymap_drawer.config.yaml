@@ -1,0 +1,14 @@
+# keymap-drawer global config
+# Styling and parsing options only — no board-specific physical layouts.
+# Per-board layouts live in config/<board>.json (auto-discovered by the workflow).
+
+draw_config:
+  dark_mode: "auto"
+  n_columns: 1
+  footer_text: ""
+
+parse_config:
+  raw_binding_map:
+    "&none": {type: "ghost"}
+  zmk_keycode_map:
+    HYPER: "Hyper"

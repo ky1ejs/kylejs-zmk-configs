@@ -1,0 +1,60 @@
+name: Draw keymaps & deploy to Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "config/*.keymap"
+      - "config/*.dtsi"
+      - "config/*.json"
+      - "keymap_drawer.config.yaml"
+      - "pages/**"
+      - ".github/workflows/draw-and-deploy.yml"
+  workflow_dispatch:
+
+# Allow only one concurrent deployment
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  draw:
+    uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
+    with:
+      keymap_patterns: "config/*.keymap"
+      config_path: "keymap_drawer.config.yaml"
+      output_folder: "keymap-drawer"
+      json_path: "config"
+      west_config_path: ""
+      destination: "artifact"
+      artifact_name: "keymap-drawings"
+      fail_on_error: true
+
+  deploy:
+    needs: draw
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: keymap-drawings
+          path: site/keymap-drawer
+
+      - name: Build HTML from SVGs
+        run: bash pages/build-site.sh site/keymap-drawer site/index.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
