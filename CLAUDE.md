@@ -154,14 +154,14 @@ Right: `SPC/FUN  BSP/SYM  DEL/SYM2`
 
 ### SYM layer layout (left hand)
 
-Brackets are on middle/index fingers (stronger fingers), operators on pinky/ring.
-GRAVE and TILDE are on SYM2 (pos R and T) to make room for semicolon.
+Brackets on middle/index (stronger fingers). Tilde on thumb row.
+GRAVE remains on SYM2 layer.
 ```
 pinky  ring   mid    index  inner
-<      >      {      }      —
-!      =      (      )      +
-&      |      [      ]      ;
-       _      *      "            (thumb row)
+!      @      {      }      =
+;      —      (      )      +
+&      —      [      ]      |
+       _      *      ~            (thumb row)
 ```
 
 ### LED indicators (left half only)

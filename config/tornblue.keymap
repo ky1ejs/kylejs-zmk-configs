@@ -163,16 +163,16 @@
 
         /* ── 3: SYM  (hold BSP — pos 41) ────────────────────── */
         /*  Brackets on middle/index (stronger fingers):           */
-        /*    < >  { }  —    |  ! =  ( )  +  |  & |  [ ]  ;      */
-        /*  Operators on pinky/ring. Semicolon on inner bottom.    */
-        /*  GRAVE and TILDE moved to SYM2 layer.                   */
+        /*    ! @  { }  =   |  ; —  ( )  +  |  & —  [ ]  |      */
+        /*  Tilde on thumb row (relocated from SYM2).              */
+        /*  GRAVE remains on SYM2 layer.                           */
         sym_layer {
             label = "SYM";
             bindings = <
-    &none       &kp LT      &kp GT      &kp LBRC    &kp RBRC    &none           &trans      &trans      &trans      &trans      &trans      &none
-    &none       &kp EXCL    &kp EQUAL   &kp LPAR    &kp RPAR    &kp PLUS        &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
-    &none       &kp AMPS    &kp PIPE    &kp LBKT    &kp RBKT    &kp SEMI        &trans      &trans      &trans      &trans      &trans      &none
-                    &none   &kp UNDER   &kp ASTRK   &kp DQT                     &trans      &trans      &trans      &none
+    &none       &kp EXCL    &kp AT      &kp LBRC    &kp RBRC    &kp EQUAL       &trans      &trans      &trans      &trans      &trans      &none
+    &none       &kp SEMI    &none       &kp LPAR    &kp RPAR    &kp PLUS        &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
+    &none       &kp AMPS    &none       &kp LBKT    &kp RBKT    &kp PIPE        &trans      &trans      &trans      &trans      &trans      &none
+                    &none   &kp UNDER   &kp ASTRK   &kp TILDE                   &trans      &trans      &trans      &none
             >;
             sensor-bindings = <&inc_dec_kp LC(Y) LC(Z)>;
         };
