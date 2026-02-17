@@ -149,30 +149,30 @@
         };
 
         /* ── 2: NUM  (hold TAB — pos 39) ────────────────────── */
-        /*  Right-hand numpad: 789 / 456 / 123  with [ ] ' = ` \  */
+        /*  Right-hand numpad: 789 / 456 / 123  with [ ] ' 0 ` \  */
+        /*  BSP and DEL tap through from base layer                */
         num_layer {
             label = "NUM";
             bindings = <
     &none       &trans      &trans      &trans      &trans      &trans          &kp LBKT    &kp N7      &kp N8      &kp N9      &kp RBKT    &none
-    &none       &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT   &kp HYPER       &kp SQT     &kp N4      &kp N5      &kp N6      &kp EQUAL   &none
+    &none       &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT   &kp HYPER       &kp SQT     &kp N4      &kp N5      &kp N6      &kp N0      &none
     &none       &trans      &trans      &trans      &trans      &trans          &kp GRAVE   &kp N1      &kp N2      &kp N3      &kp BSLH    &none
-                    &none   &trans      &trans      &trans                      &kp MINUS   &kp N0      &kp DOT     &none
+                    &none   &trans      &trans      &trans                      &kp MINUS   &trans      &trans      &none
             >;
             sensor-bindings = <&inc_dec_kp PLUS MINUS>;
         };
 
         /* ── 3: SYM  (hold BSP — pos 41) ────────────────────── */
         /*  Brackets on middle/index (stronger fingers):           */
-        /*    ! @  { }  =   |  ; —  ( )  +  |  & —  [ ]  |      */
-        /*  Tilde on thumb row (relocated from SYM2).              */
-        /*  GRAVE remains on SYM2 layer.                           */
+        /*    ! @  { }  =   |  ; &  ( )  +  |  —  *  [ ]  $     */
+        /*  Grave and hyphen on thumb row. Shift+hyphen = _        */
         sym_layer {
             label = "SYM";
             bindings = <
     &none       &kp EXCL    &kp AT      &kp LBRC    &kp RBRC    &kp EQUAL       &trans      &trans      &trans      &trans      &trans      &none
-    &none       &kp SEMI    &none       &kp LPAR    &kp RPAR    &kp PLUS        &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
-    &none       &kp AMPS    &none       &kp LBKT    &kp RBKT    &kp PIPE        &trans      &trans      &trans      &trans      &trans      &none
-                    &none   &kp UNDER   &kp ASTRK   &kp TILDE                   &trans      &trans      &trans      &none
+    &none       &kp SEMI    &kp AMPS    &kp LPAR    &kp RPAR    &kp PLUS        &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
+    &none       &none       &kp ASTRK   &kp LBKT    &kp RBKT    &kp DLLR        &trans      &trans      &trans      &trans      &trans      &none
+                    &none   &kp MINUS   &kp GRAVE   &kp TILDE                   &trans      &trans      &trans      &none
             >;
             sensor-bindings = <&inc_dec_kp LC(Y) LC(Z)>;
         };
@@ -192,12 +192,12 @@
 
         /* ── 5: SYM2 (hold DEL — pos 42) ────────────────────── */
         /*  Rare symbols on left hand — no same-hand chording      */
-        /*  GRAVE and TILDE on top row (relocated from SYM)        */
+        /*  PIPE and TILDE on top row                              */
         /*  BT profiles on bottom row for wireless management      */
         sym2_layer {
             label = "SYM2";
             bindings = <
-    &none       &kp AT      &kp HASH    &kp DLLR    &kp GRAVE   &kp TILDE       &trans      &trans      &trans      &trans      &trans      &none
+    &none       &kp AT      &kp HASH    &kp PIPE    &none       &kp TILDE       &trans      &trans      &trans      &trans      &trans      &none
     &none       &kp PRCNT   &kp CARET   &kp BSLH    &trans      &trans          &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
     &none       &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR &trans     &trans      &trans      &trans      &trans      &none
                     &none   &trans      &trans      &trans                      &trans      &trans      &trans      &none
