@@ -61,7 +61,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <150>;
-            require-prior-idle-ms = <75>;
+            require-prior-idle-ms = <50>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
@@ -83,6 +83,7 @@
 
         combo_equal {
             timeout-ms = <50>;
+            require-prior-idle-ms = <150>;
             key-positions = <2 3>;          /* W + E  →  = */
             bindings = <&kp EQUAL>;
             layers = <BASE>;
@@ -96,6 +97,7 @@
         };
         combo_lpar {
             timeout-ms = <50>;
+            require-prior-idle-ms = <150>;
             key-positions = <7 8>;          /* U + I  →  ( */
             bindings = <&kp LPAR>;
             layers = <BASE>;
@@ -109,6 +111,7 @@
         };
         combo_esc {
             timeout-ms = <50>;
+            require-prior-idle-ms = <150>;
             key-positions = <26 27>;        /* X + C  →  ESC */
             bindings = <&kp ESC>;
             layers = <BASE>;
@@ -159,15 +162,16 @@
         };
 
         /* ── 3: SYM  (hold BSP — pos 41) ────────────────────── */
-        /*  Brackets stacked: pinky=open, ring=close              */
-        /*  Home row: ( ) ! = +  — most common coding operators   */
-        /*  Bigrams: != <= >= <> () {} [] are inward rolls         */
+        /*  Brackets on middle/index (stronger fingers):           */
+        /*    < >  { }  —    |  ! =  ( )  +  |  & |  [ ]  ;      */
+        /*  Operators on pinky/ring. Semicolon on inner bottom.    */
+        /*  GRAVE and TILDE moved to SYM2 layer.                   */
         sym_layer {
             label = "SYM";
             bindings = <
-    &none       &kp LBRC    &kp RBRC    &kp LT      &kp GT      &kp GRAVE       &trans      &trans      &trans      &trans      &trans      &none
-    &none       &kp LPAR    &kp RPAR    &kp EXCL    &kp EQUAL   &kp PLUS        &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
-    &none       &kp LBKT    &kp RBKT    &kp AMPS    &kp PIPE    &kp TILDE       &trans      &trans      &trans      &trans      &trans      &none
+    &none       &kp LT      &kp GT      &kp LBRC    &kp RBRC    &none           &trans      &trans      &trans      &trans      &trans      &none
+    &none       &kp EXCL    &kp EQUAL   &kp LPAR    &kp RPAR    &kp PLUS        &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
+    &none       &kp AMPS    &kp PIPE    &kp LBKT    &kp RBKT    &kp SEMI        &trans      &trans      &trans      &trans      &trans      &none
                     &none   &kp UNDER   &kp ASTRK   &kp DQT                     &trans      &trans      &trans      &none
             >;
             sensor-bindings = <&inc_dec_kp LC(Y) LC(Z)>;
@@ -188,11 +192,12 @@
 
         /* ── 5: SYM2 (hold DEL — pos 42) ────────────────────── */
         /*  Rare symbols on left hand — no same-hand chording      */
+        /*  GRAVE and TILDE on top row (relocated from SYM)        */
         /*  BT profiles on bottom row for wireless management      */
         sym2_layer {
             label = "SYM2";
             bindings = <
-    &none       &kp AT      &kp HASH    &kp DLLR    &trans      &trans          &trans      &trans      &trans      &trans      &trans      &none
+    &none       &kp AT      &kp HASH    &kp DLLR    &kp GRAVE   &kp TILDE       &trans      &trans      &trans      &trans      &trans      &none
     &none       &kp PRCNT   &kp CARET   &kp BSLH    &trans      &trans          &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
     &none       &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR &trans     &trans      &trans      &trans      &trans      &none
                     &none   &trans      &trans      &trans                      &trans      &trans      &trans      &none

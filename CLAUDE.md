@@ -7,6 +7,7 @@ This is a **multi-board** ZMK firmware configuration repo. It contains keymaps a
 ## Rules of Development
 - You MUST ALWAYS review the README.md, CLAUDE.md and code comments and update them as needed when making changes to the repo
 - You MUST ALWAYS ensure that keymaps have a easy to ready code comment above them which describes the layout.
+- You MUST ALWAYS avoid placing keys on the same hand as the thumb that is pressed to access that layer (e.g. avoid putting keys on the right hand that are only accessible when holding the right thumb layer key).
 
 ## Repository structure
 
@@ -95,7 +96,7 @@ From pinky to index: **CTRL, ALT, GUI, SHIFT**. Hyper (all four mods) on the inn
 Left: `CTRL/A  ALT/S  GUI/D  SFT/F  HYP/G`
 Right: `HYP/H  SFT/J  GUI/K  ALT/L  CTRL/'`
 
-Hold-tap config: balanced flavor, 200ms tapping-term, 150ms quick-tap, 125ms require-prior-idle.
+Hold-tap config: balanced flavor, 200ms tapping-term, 150ms quick-tap, 125ms require-prior-idle. `hm_shift` uses 50ms require-prior-idle (lower threshold so shift registers reliably mid-sentence).
 
 ### Thumb keys (layer-taps)
 
@@ -126,12 +127,13 @@ Right: `SPC/FUN  BSP/SYM  DEL/SYM2`
 
 ### SYM layer layout (left hand)
 
-Brackets are on middle/index fingers (stronger fingers), operators on pinky/ring:
+Brackets are on middle/index fingers (stronger fingers), operators on pinky/ring.
+GRAVE and TILDE are on SYM2 (pos R and T) to make room for semicolon.
 ```
 pinky  ring   mid    index  inner
-<      >      {      }      `
+<      >      {      }      —
 !      =      (      )      +
-&      |      [      ]      ~
+&      |      [      ]      ;
        _      *      "            (thumb row)
 ```
 
