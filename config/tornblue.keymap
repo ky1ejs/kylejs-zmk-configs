@@ -215,14 +215,6 @@
     };
 };
 
-/* ── Devicetree overlays ───────────────────────────────────── */
-
-/* Fix #8: wake from deep sleep on keypress */
-&kscan0 {
-    wakeup-source;
-};
-
-/* Fix #4: reduce encoder sensitivity (default 15 = one per detent) */
 / {
     sensors {
         triggers-per-rotation = <12>;
