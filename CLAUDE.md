@@ -42,8 +42,9 @@ To flash: plug in the board via USB, enter bootloader mode (usually double-tap r
 # Board: TornBlue
 
 ## Hardware
+https://github.com/rtitmuss/tornblue
 
-- Designer: rtitmuss
+- Designer: [rtitmuss](https://github.com/rtitmuss)
 - MCU: nRF52840 (both halves)
 - Layout: 44 physical keys (3×6 + 4 thumb per side), using 36 (3×5 + 3 thumb)
 - Encoders: EVQWGD001 (Alps Alpine) — uses Zephyr EC11 driver. Only the LEFT half has an encoder defined in the DTS (GPIO P0.09/P0.10). The right encoder is not wired in the board definition.
