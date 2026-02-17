@@ -4,6 +4,10 @@
 
 This is a **multi-board** ZMK firmware configuration repo. It contains keymaps and config for all of Kyle's keyboards. Each board has its own `.keymap` and `.conf` file in `config/`, and all boards are listed in `build.yaml`.
 
+## Rules of Development
+- You MUST ALWAYS review the README.md, CLAUDE.md and code comments and update them as needed when making changes to the repo
+- You MUST ALWAYS ensure that keymaps have a easy to ready code comment above them which describes the layout.
+
 ## Repository structure
 
 ```
@@ -45,7 +49,6 @@ To flash: plug in the board via USB, enter bootloader mode (usually double-tap r
 - Encoders: EVQWGD001 (Alps Alpine) — uses Zephyr EC11 driver. Only the LEFT half has an encoder defined in the DTS (GPIO P0.09/P0.10). The right encoder is not wired in the board definition.
 - 3 onboard GPIO indicator LEDs per half (active high)
 - Optional WS2812 RGB underglow strip (NOT soldered, disabled via Kconfig)
-- Bluetooth device name: `kylejs-tornblue`
 - UF2 bootloader (double-tap reset to enter bootloader)
 - Both halves must be flashed for keymap changes
 
@@ -59,24 +62,6 @@ This fork has the TornBlue board migrated to HWMv2 format for Zephyr 4.1. Key fi
 - `led_driver.c` — GPIO indicator LEDs that light up on NAV (layer 1), NUM (layer 2), SYM (layer 3)
 - Defconfigs, Kconfig files, pinctrl files
 
-## Build matrix entry
-
-```yaml
-- board: tornblue_left//zmk
-  artifact-name: tornblue_left-zmk
-- board: tornblue_right//zmk
-  artifact-name: tornblue_right-zmk
-```
-
-## tornblue.conf
-
-- `CONFIG_ZMK_KEYBOARD_NAME="kylejs-tornblue"` — Bluetooth device name
-- `CONFIG_BT_CTLR_TX_PWR_PLUS_8=y` — increased BT TX power for range
-- `CONFIG_ZMK_HID_REPORT_TYPE_NKRO=y` — NKRO for reliable Hyper key
-- `CONFIG_ZMK_RGB_UNDERGLOW=n` / `CONFIG_LED_STRIP=n` — disable WS2812 RGB (board defconfig enables it by default)
-- `CONFIG_ZMK_SLEEP=y` with 15 min timeout (900000 ms)
-- EC11 encoder config is in the left defconfig only, NOT in the shared conf
-
 ## Key position map (44 keys)
 
 ```
@@ -86,21 +71,21 @@ This fork has the TornBlue board migrated to HWMv2 format for Zephyr 4.1. Key fi
       36 37 38 39  | 40 41 42 43
 ```
 
-Unused positions (set to `&none`): 0, 12, 24 (left outer col), 11, 23, 35 (right outer col), 36 (left outer thumb), 43 (right outer thumb).
+Unused positions (set to `&none`): 0, 12, 24 (left outer col), 11, 23, 35 (right outer col), 36 (left outer thumb where an EVQWGD001 encoder is), 43 (right outer thumb where an EVQWGD001 encoder is).
 
 ## Keymap design
 
 ### Layers
 
-| # | Name  | Activation     | Description |
-|---|-------|----------------|-------------|
-| 0 | BASE  | default        | QWERTY with home row mods (CAGS) and `'` on right pinky |
-| 1 | NAV   | hold ENT       | Arrows on right home row (J=←, K=→, L=↑, ;'=↓), clipboard, page nav |
-| 2 | NUM   | hold TAB       | Right-hand numpad (789/456/123) with punctuation |
-| 3 | SYM   | hold BSP       | Brackets on middle/index, operators on pinky/ring |
-| 4 | FUN   | hold SPC       | F-keys in numpad arrangement on left hand |
-| 5 | SYM2  | hold DEL       | Rare symbols (@#$%^) and BT profile switching (bottom row) |
-| 6 | MEDIA | hold ESC       | Transport controls (prev/play/next) on right home row |
+| # | Name  | Activation     |
+|---|-------|----------------|
+| 0 | BASE  | default        |
+| 1 | NAV   | hold ENT       |
+| 2 | NUM   | hold TAB       |
+| 3 | SYM   | hold BSP       |
+| 4 | FUN   | hold SPC       |
+| 5 | SYM2  | hold DEL       |
+| 6 | MEDIA | hold ESC       |
 
 ### Home row mods (CAGS order)
 
@@ -152,10 +137,3 @@ pinky  ring   mid    index  inner
 ### Bluetooth profiles (SYM2 layer, bottom row)
 
 Z=BT0, X=BT1, C=BT2, V=BT3, B=BT_CLR. Switch profiles to connect to different computers.
-
-### Known gaps
-
-- Semicolon (`;`) is not mapped anywhere since `'` replaced it on the home row. Needs a combo (e.g. `.` + `/`).
-- Right encoder is not defined in the board DTS — only the left encoder is functional.
-- Encoder push/click is not wired in the TornBlue board definition.
-- The fork's `led_driver.c` has layer indices that may not match the keymap if layers are reordered.
