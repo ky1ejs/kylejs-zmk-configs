@@ -10,5 +10,3 @@ draw_config:
 parse_config:
   raw_binding_map:
     "&none": {type: "ghost"}
-  zmk_keycode_map:
-    HYPER: "Hyper"

@@ -60,7 +60,7 @@ The `draw-and-deploy.yml` workflow runs on every push that changes keymap files,
 Generated SVGs are NOT committed to the repo — they exist only as CI artifacts and are deployed directly to Pages.
 
 **Config files:**
-- `keymap_drawer.config.yaml` — global styling and parsing config (dark mode, ghost keys for `&none`, HYPER keycode mapping). Does NOT contain physical layouts.
+- `keymap_drawer.config.yaml` — global styling and parsing config (dark mode, ghost keys for `&none`). Does NOT contain physical layouts or keycode overrides (the defaults handle symbol display). Do NOT add `zmk_keycode_map` — it replaces the entire default map instead of merging.
 - `config/<board>.json` — per-board physical layout in QMK-style JSON format (x/y coordinates per key). Auto-discovered by the workflow via `json_path: "config"`.
 
 **Repo Settings prerequisite:** Pages → Source must be set to **GitHub Actions** (not "Deploy from a branch").
