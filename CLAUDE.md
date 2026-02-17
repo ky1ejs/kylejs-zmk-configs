@@ -48,7 +48,7 @@ https://github.com/rtitmuss/tornblue
 - MCU: nRF52840 (both halves)
 - Layout: 44 physical keys (3×6 + 4 thumb per side), using 36 (3×5 + 3 thumb)
 - Encoders: EVQWGD001 (Alps Alpine) — uses Zephyr EC11 driver. Only the LEFT half has an encoder defined in the DTS (GPIO P0.09/P0.10). The right encoder is not wired in the board definition.
-- 3 onboard GPIO indicator LEDs per half (active high)
+- 3 GPIO-controllable indicator LEDs + 1 charging LED per half (active high)
 - Optional WS2812 RGB underglow strip (NOT soldered, disabled via Kconfig)
 - UF2 bootloader (double-tap reset to enter bootloader)
 - Both halves must be flashed for keymap changes
@@ -60,7 +60,7 @@ Board definition lives in Kyle's fork: https://github.com/ky1ejs/zmk/tree/tornbl
 This fork has the TornBlue board migrated to HWMv2 format for Zephyr 4.1. Key files at `app/boards/rtitmuss/tornblue/`:
 - `tornblue.dtsi` — shared devicetree (matrix transform, kscan, battery, LED aliases)
 - `tornblue_left_nrf52840_zmk.dts` / `tornblue_right_nrf52840_zmk.dts` — per-half DTS (still contains SPI/WS2812 blocks, disabled at Kconfig level)
-- `led_driver.c` — GPIO indicator LEDs that light up on NAV (layer 1), NUM (layer 2), SYM (layer 3)
+- `led_driver.c` — GPIO indicator LEDs, configurable via `CONFIG_TORNBLUE_LED_BT_PROFILE` for BT profile or layer indication
 - Defconfigs, Kconfig files, pinctrl files
 
 ## Key position map (44 keys)
@@ -134,6 +134,25 @@ pinky  ring   mid    index  inner
 &      |      [      ]      ~
        _      *      "            (thumb row)
 ```
+
+### LED indicators (left half only)
+
+The 3 onboard GPIO LEDs on the left half are controlled by `led_driver.c` in the
+ZMK fork. The mode is selected via Kconfig in `tornblue.conf`:
+
+**`CONFIG_TORNBLUE_LED_BT_PROFILE=y`** (current setting) — one LED per BT profile:
+
+| Profile | LED1 | LED2 | LED3 |
+|---------|------|------|------|
+| BT0     | ON   | OFF  | OFF  |
+| BT1     | OFF  | ON   | OFF  |
+| BT2     | OFF  | OFF  | ON   |
+| BT3     | ON   | ON   | ON   |
+
+**`CONFIG_TORNBLUE_LED_BT_PROFILE=n`** (default in fork) — layer indicators:
+LED1=NAV (layer 1), LED2=NUM (layer 2), LED3=SYM (layer 3).
+
+All LEDs off = system asleep. Right half LEDs are unused (no BT profile data on peripheral).
 
 ### Bluetooth profiles (SYM2 layer, bottom row)
 
