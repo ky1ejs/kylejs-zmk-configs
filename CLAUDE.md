@@ -121,13 +121,9 @@ Unused positions (set to `&none`): 0, 12, 24 (left outer col), 11, 23, 35 (right
 From pinky to index: **CTRL, ALT, GUI, SHIFT**. Hyper (all four mods) on the inner column (G and H).
 
 Left: `CTRL/A  ALT/S  GUI/D  SFT/F  HYP/G`
-Right: `HYP/H  SFT/J  GUI/K  ALT/L  '/;(tap-dance)`
+Right: `HYP/H  SFT/J  GUI/K  ALT/L  CTRL/'`
 
 Hold-tap config: balanced flavor, 200ms tapping-term, 150ms quick-tap, 125ms require-prior-idle. `hm_shift` uses 50ms require-prior-idle (lower threshold so shift registers reliably mid-sentence).
-
-### Tap-dance: `'` / `;` (right pinky, position 22)
-
-Single tap = `'`, double tap = `;`, hold = RCTRL. Uses `td_sqt_semi` behavior wrapping the `hm` hold-tap, so hold still gives RCTRL like the other home row mods.
 
 ### Thumb keys (layer-taps)
 
