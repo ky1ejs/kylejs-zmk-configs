@@ -155,14 +155,14 @@ Right: `SPC/FUN  BSP/SYM  DEL/SYM2`
 
 ### SYM layer layout (left hand)
 
-Brackets on middle/index (stronger fingers). Grave and hyphen on thumb row.
-Shift+hyphen gives underscore.
+Brackets on middle/index (stronger fingers). Hyphen, semicolon, and grave on thumb row.
+Shift+grave gives tilde. Shift+hyphen gives underscore.
 ```
 pinky  ring   mid    index  inner
 !      @      {      }      =
-;      &      (      )      +
+—      &      (      )      +
 —      *      [      ]      $
-       -      `      ~            (thumb row)
+       -      ;      `            (thumb row)
 ```
 
 ### LED indicators (left half only)
