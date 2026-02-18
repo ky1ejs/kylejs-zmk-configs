@@ -171,15 +171,15 @@
 
         /* ── 3: SYM  (hold BSP — pos 41) ────────────────────── */
         /*  Brackets on middle/index (stronger fingers):           */
-        /*    ! @  { }  =   |  ; &  ( )  +  |  —  *  [ ]  $     */
-        /*  Grave and hyphen on thumb row. Shift+hyphen = _        */
+        /*    ! @  { }  =   |  —  &  ( )  +  |  —  *  [ ]  $    */
+        /*  Hyphen, ;, and grave on thumb row. Shift+grave = ~      */
         sym_layer {
             label = "SYM";
             bindings = <
     &none       &kp EXCL    &kp AT      &kp LBRC    &kp RBRC    &kp EQUAL       &trans      &trans      &trans      &trans      &trans      &none
-    &none       &kp SEMI    &kp AMPS    &kp LPAR    &kp RPAR    &kp PLUS        &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
+    &none       &none       &kp AMPS    &kp LPAR    &kp RPAR    &kp PLUS        &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
     &none       &none       &kp ASTRK   &kp LBKT    &kp RBKT    &kp DLLR        &trans      &trans      &trans      &trans      &trans      &none
-                    &none   &kp MINUS   &kp GRAVE   &kp TILDE                   &trans      &trans      &trans      &none
+                    &none   &kp MINUS   &kp SEMI    &kp GRAVE                   &trans      &trans      &trans      &none
             >;
             sensor-bindings = <&inc_dec_kp LC(Y) LC(Z)>;
         };
@@ -218,7 +218,7 @@
             label = "MEDIA";
             bindings = <
     &none       &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &trans      &none
-    &none       &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT   &kp HYPER       &kp C_PREV  &kp C_PP    &kp C_NEXT  &trans      &trans      &none
+    &none       &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT   &kp HYPER       &trans      &kp C_PREV  &kp C_PP    &kp C_NEXT  &trans      &none
     &none       &trans      &trans      &trans      &trans      &trans          &trans      &trans      &trans      &trans      &none       &none
                     &none   &trans      &trans      &trans                      &kp C_STOP  &trans      &trans      &none
             >;
