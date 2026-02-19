@@ -180,12 +180,13 @@
         };
 
         /* ── 1: NAV  (hold ENT — pos 38) ────────────────────── */
-        /*  Clipboard on right top row (Ctrl+letter for Linux/Win)  */
-        /*  Vim arrows on right home row, page nav on bottom row    */
+        /*  Left top row: one-handed shortcuts (CMD+T, screenshot)   */
+        /*  Clipboard on right top row (Ctrl+letter for Linux/Win)   */
+        /*  Vim arrows on right home row, page nav on bottom row     */
         nav_layer {
             label = "NAV";
             bindings = <
-    &none       &trans      &trans      &trans      &trans      &trans          &kp LC(Y)   &kp LC(V)   &kp LC(C)   &kp LC(X)   &kp LC(Z)   &none
+    &none       &trans      &trans      &trans      &kp LG(LS(N4)) &kp LG(T)   &kp LC(Y)   &kp LC(V)   &kp LC(C)   &kp LC(X)   &kp LC(Z)   &none
     &none       &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT   &kp HYPER       &caps_word  &kp LEFT    &kp RIGHT   &kp UP      &kp DOWN    &none
     &none       &trans      &trans      &trans      &trans      &trans          &kp HOME    &kp PG_DN   &kp PG_UP   &kp END     &kp INS     &none
                     &none   &trans      &trans      &trans                      &kp SPACE   &kp BSPC    &kp DEL     &none
