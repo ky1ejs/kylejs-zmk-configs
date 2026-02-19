@@ -39,7 +39,7 @@ Making shift trigger on either hand (`hold-trigger-key-positions = <KEYS_L KEYS_
 
 ### Shift behaviours (`hml_s` / `hmr_s`)
 - **Non-positional**: triggers on both hands (`KEYS_L KEYS_R THUMBS`) so same-hand Shift+key works
-- **`require-prior-idle-ms = 150`**: raised from 50ms to eliminate false shift activations during typing (the fast-path bypass now covers typical inter-key intervals)
+- **`require-prior-idle-ms = 100`**: compromise — 50ms caused false shift activations (repeated Js), 150ms prevented shift from activating mid-typing entirely. 100ms filters the fastest rolls while still allowing deliberate mid-sentence capitalization.
 - **`tapping-term-ms = 200`**: lowered from 280ms so same-hand shift resolves faster (following infused-kim's approach for shift-specific tuning)
 - **`quick-tap-ms = 175`**: unchanged
 
@@ -52,6 +52,14 @@ Making shift trigger on either hand (`hold-trigger-key-positions = <KEYS_L KEYS_
 ### Accepted trade-offs
 - Same-hand mod+alpha shortcuts (CMD+W, CMD+S, CMD+Z) require a deliberate ~280ms hold before pressing the alpha key
 - Same-hand Shift+alpha resolves faster at ~200ms due to the lower tapping-term on shift behaviours
+
+### Trial log
+
+| Date | Shift idle | Shift tapping-term | Result |
+|------|-----------|-------------------|--------|
+| 2026-02-19 | 50ms | 280ms | Repeated Js — false shift activations during typing |
+| 2026-02-19 | 150ms | 200ms | Shift never activates mid-typing — can't capitalize |
+| 2026-02-19 | 100ms | 200ms | Trial in progress |
 
 ## References
 
