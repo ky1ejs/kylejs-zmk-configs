@@ -111,12 +111,13 @@
             hold-trigger-on-release;
         };
 
+        /* Thumb layer-taps — no require-prior-idle since thumb keys
+         * aren't part of the alpha typing flow (no accidental rolls). */
         lt_hp: layer_tap_hp {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <175>;
-            require-prior-idle-ms = <150>;
             flavor = "balanced";
             bindings = <&mo>, <&kp>;
         };
