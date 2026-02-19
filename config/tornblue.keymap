@@ -81,14 +81,14 @@
 
         /* Left-hand shift — triggers on either hand so shift works same-hand.
          * Lower tapping-term (200ms) so same-hand shift resolves faster.
-         * require-prior-idle at 100ms: compromise between false activations (50ms)
-         * and shift never activating mid-typing (150ms). */
+         * require-prior-idle at 75ms: filters fastest rolls (~40-80ms) while
+         * still allowing shift to activate during mid-sentence capitalization. */
         hml_s: homerow_mods_left_shift {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <175>;
-            require-prior-idle-ms = <100>;
+            require-prior-idle-ms = <75>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <KEYS_L KEYS_R THUMBS>;
@@ -97,14 +97,14 @@
 
         /* Right-hand shift — triggers on either hand so shift works same-hand.
          * Lower tapping-term (200ms) so same-hand shift resolves faster.
-         * require-prior-idle at 100ms: compromise between false activations (50ms)
-         * and shift never activating mid-typing (150ms). */
+         * require-prior-idle at 75ms: filters fastest rolls (~40-80ms) while
+         * still allowing shift to activate during mid-sentence capitalization. */
         hmr_s: homerow_mods_right_shift {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <175>;
-            require-prior-idle-ms = <100>;
+            require-prior-idle-ms = <75>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <KEYS_L KEYS_R THUMBS>;
