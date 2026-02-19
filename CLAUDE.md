@@ -123,9 +123,9 @@ From pinky to index: **CTRL, ALT, GUI, SHIFT**. Hyper (all four mods) on the inn
 Left: `CTRL/A  ALT/S  GUI/D  SFT/F  HYP/G`
 Right: `HYP/H  SFT/J  GUI/K  ALT/L  CTRL/'`
 
-**Positional hold-tap:** Left-hand mods (`hml`/`hml_s`) only activate when a right-hand or thumb key is pressed; right-hand mods (`hmr`/`hmr_s`) only activate on left-hand or thumb keys. Same-hand rolls always resolve as taps, preventing misfires during fast typing. `hold-trigger-on-release` enables same-side modifier combos (e.g. Ctrl+Shift from one hand).
+**Positional hold-tap:** Left-hand mods (`hml`) only activate when a right-hand or thumb key is pressed; right-hand mods (`hmr`) only activate on left-hand or thumb keys. Same-hand rolls always resolve as taps, preventing misfires during fast typing. **Shift is the exception** — `hml_s`/`hmr_s` trigger on either hand so same-hand Shift+key works (e.g. hold J for Shift, tap I for capital I). `hold-trigger-on-release` enables same-side modifier combos (e.g. Ctrl+Shift from one hand).
 
-Hold-tap config: balanced flavor, 280ms tapping-term, 175ms quick-tap, 150ms require-prior-idle. Shift variants (`hml_s`/`hmr_s`) use 50ms require-prior-idle (lower threshold so shift registers reliably mid-sentence).
+Hold-tap config: balanced flavor, 280ms tapping-term, 175ms quick-tap, 100ms require-prior-idle. Shift variants (`hml_s`/`hmr_s`) use 50ms require-prior-idle (lower threshold so shift registers reliably mid-sentence).
 
 ### Thumb keys (layer-taps)
 
