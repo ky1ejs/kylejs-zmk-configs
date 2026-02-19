@@ -81,14 +81,14 @@
 
         /* Left-hand shift — triggers on either hand so shift works same-hand.
          * Lower tapping-term (200ms) so same-hand shift resolves faster.
-         * require-prior-idle at 75ms: filters fastest rolls (~40-80ms) while
-         * still allowing shift to activate during mid-sentence capitalization. */
+         * require-prior-idle at 50ms: lowest viable value for shift to
+         * activate reliably mid-typing. See decisions/001 trial log. */
         hml_s: homerow_mods_left_shift {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <175>;
-            require-prior-idle-ms = <75>;
+            require-prior-idle-ms = <50>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <KEYS_L KEYS_R THUMBS>;
@@ -97,14 +97,14 @@
 
         /* Right-hand shift — triggers on either hand so shift works same-hand.
          * Lower tapping-term (200ms) so same-hand shift resolves faster.
-         * require-prior-idle at 75ms: filters fastest rolls (~40-80ms) while
-         * still allowing shift to activate during mid-sentence capitalization. */
+         * require-prior-idle at 50ms: lowest viable value for shift to
+         * activate reliably mid-typing. See decisions/001 trial log. */
         hmr_s: homerow_mods_right_shift {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <175>;
-            require-prior-idle-ms = <75>;
+            require-prior-idle-ms = <50>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <KEYS_L KEYS_R THUMBS>;
@@ -119,47 +119,6 @@
             require-prior-idle-ms = <150>;
             flavor = "balanced";
             bindings = <&mo>, <&kp>;
-        };
-    };
-
-    /* ── Combos (BASE layer only) ────────────────────────────── */
-    combos {
-        compatible = "zmk,combos";
-
-        combo_equal {
-            timeout-ms = <30>;
-            require-prior-idle-ms = <150>;
-            key-positions = <2 3>;          /* W + E  →  = */
-            bindings = <&kp EQUAL>;
-            layers = <BASE>;
-        };
-        combo_under {
-            timeout-ms = <30>;
-            require-prior-idle-ms = <150>;
-            key-positions = <3 4>;          /* E + R  →  _ */
-            bindings = <&kp UNDER>;
-            layers = <BASE>;
-        };
-        combo_lpar {
-            timeout-ms = <30>;
-            require-prior-idle-ms = <150>;
-            key-positions = <7 8>;          /* U + I  →  ( */
-            bindings = <&kp LPAR>;
-            layers = <BASE>;
-        };
-        combo_rpar {
-            timeout-ms = <30>;
-            require-prior-idle-ms = <150>;
-            key-positions = <8 9>;          /* I + O  →  ) */
-            bindings = <&kp RPAR>;
-            layers = <BASE>;
-        };
-        combo_esc {
-            timeout-ms = <30>;
-            require-prior-idle-ms = <150>;
-            key-positions = <26 27>;        /* X + C  →  ESC */
-            bindings = <&kp ESC>;
-            layers = <BASE>;
         };
     };
 
@@ -180,15 +139,16 @@
         };
 
         /* ── 1: NAV  (hold ENT — pos 38) ────────────────────── */
-        /*  Left top row: one-handed shortcuts (CMD+T, screenshot)   */
+        /*  Left hand: one-handed shortcuts for mousing              */
+        /*    top: CMD+Q, CMD+W, CMD+R, CMD+T  bottom: screenshot  */
         /*  Clipboard on right top row (Ctrl+letter for Linux/Win)   */
         /*  Vim arrows on right home row, page nav on bottom row     */
         nav_layer {
             label = "NAV";
             bindings = <
-    &none       &trans      &kp LG(W)   &trans      &kp LG(LS(N4)) &kp LG(T)   &kp LC(Y)   &kp LC(V)   &kp LC(C)   &kp LC(X)   &kp LC(Z)   &none
+    &none       &kp LG(Q)   &kp LG(W)   &trans      &kp LG(R)   &kp LG(T)       &kp LC(Y)   &kp LC(V)   &kp LC(C)   &kp LC(X)   &kp LC(Z)   &none
     &none       &kp LCTRL   &kp LALT    &kp LGUI    &kp LSHFT   &kp HYPER       &caps_word  &kp LEFT    &kp RIGHT   &kp UP      &kp DOWN    &none
-    &none       &trans      &trans      &trans      &trans      &trans          &kp HOME    &kp PG_DN   &kp PG_UP   &kp END     &kp INS     &none
+    &none       &trans      &trans      &trans      &kp LG(LS(N4)) &trans      &kp HOME    &kp PG_DN   &kp PG_UP   &kp END     &kp INS     &none
                     &none   &trans      &trans      &trans                      &kp SPACE   &kp BSPC    &kp DEL     &none
             >;
             sensor-bindings = <&inc_dec_kp LC(LS(TAB)) LC(TAB)>;
@@ -210,13 +170,13 @@
 
         /* ── 3: SYM  (hold BSP — pos 41) ────────────────────── */
         /*  Brackets on middle/index (stronger fingers):           */
-        /*    ! @  { }  =   |  —  &  ( )  +  |  —  *  [ ]  $    */
+        /*    ! @  { }  +   |  —  &  ( )  =  |  —  *  [ ]  $    */
         /*  Hyphen, :, and grave on thumb row. Shift+grave = ~       */
         sym_layer {
             label = "SYM";
             bindings = <
-    &none       &kp EXCL    &kp AT      &kp LBRC    &kp RBRC    &kp EQUAL       &trans      &trans      &trans      &trans      &trans      &none
-    &none       &none       &kp AMPS    &kp LPAR    &kp RPAR    &kp PLUS        &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
+    &none       &kp EXCL    &kp AT      &kp LBRC    &kp RBRC    &kp PLUS        &trans      &trans      &trans      &trans      &trans      &none
+    &none       &none       &kp AMPS    &kp LPAR    &kp RPAR    &kp EQUAL       &kp HYPER   &kp RSHFT   &kp RGUI    &kp RALT    &kp RCTRL   &none
     &none       &none       &kp ASTRK   &kp LBKT    &kp RBKT    &kp DLLR        &trans      &trans      &trans      &trans      &trans      &none
                     &none   &kp MINUS   &kp COLON   &kp GRAVE                   &trans      &trans      &trans      &none
             >;

@@ -60,7 +60,8 @@ Making shift trigger on either hand (`hold-trigger-key-positions = <KEYS_L KEYS_
 | 2026-02-19 | 50ms | 280ms | Repeated Js — false shift activations during typing |
 | 2026-02-19 | 150ms | 200ms | Shift never activates mid-typing — can't capitalize |
 | 2026-02-19 | 100ms | 200ms | Shift still doesn't activate mid-typing (e.g. f/ instead of ?) |
-| 2026-02-19 | 75ms | 200ms | Trial in progress |
+| 2026-02-19 | 75ms | 200ms | Still too high — shift doesn't activate mid-typing |
+| 2026-02-19 | 50ms | 200ms | Trial in progress — 200ms tapping-term (vs original 280ms) may prevent the false Js seen in the first trial |
 
 ## References
 
