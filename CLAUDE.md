@@ -116,14 +116,16 @@ Unused positions (set to `&none`): 0, 12, 24 (left outer col), 11, 23, 35 (right
 | 5 | SYM2  | hold DEL       |
 | 6 | MEDIA | hold ESC       |
 
-### Home row mods (CAGS order)
+### Home row mods (CAGS order, positional hold-tap)
 
 From pinky to index: **CTRL, ALT, GUI, SHIFT**. Hyper (all four mods) on the inner column (G and H).
 
 Left: `CTRL/A  ALT/S  GUI/D  SFT/F  HYP/G`
 Right: `HYP/H  SFT/J  GUI/K  ALT/L  CTRL/'`
 
-Hold-tap config: balanced flavor, 200ms tapping-term, 150ms quick-tap, 125ms require-prior-idle. `hm_shift` uses 50ms require-prior-idle (lower threshold so shift registers reliably mid-sentence).
+**Positional hold-tap:** Left-hand mods (`hml`/`hml_s`) only activate when a right-hand or thumb key is pressed; right-hand mods (`hmr`/`hmr_s`) only activate on left-hand or thumb keys. Same-hand rolls always resolve as taps, preventing misfires during fast typing. `hold-trigger-on-release` enables same-side modifier combos (e.g. Ctrl+Shift from one hand).
+
+Hold-tap config: balanced flavor, 280ms tapping-term, 175ms quick-tap, 150ms require-prior-idle. Shift variants (`hml_s`/`hmr_s`) use 50ms require-prior-idle (lower threshold so shift registers reliably mid-sentence).
 
 ### Thumb keys (layer-taps)
 
